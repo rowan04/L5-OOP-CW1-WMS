@@ -2,31 +2,28 @@ import java.util.ArrayList;
 
 public class Supplier {
     private String name;
-    private int supplier_id = 5;
+    private int supplier_id;
     private String email;
     private String phone_number;
     private String address;
     private int total_orders;
     private String last_order_date;
-    private static Material[] material;
-    private ArrayList<Supplier> Suppliers;
+    private ArrayList<Supplier> supplierList;
 
     // constructor
     public Supplier(
             String name,
             String email,
             String phone_number,
-            String address,
-            Material[] material
+            String address
     ) {
         this.name = name;
-        this.supplier_id = setID(supplier_id);
+        this.supplier_id = setID();
         this.email = email;
         this.phone_number = phone_number;
         this.address = address;
         this.total_orders = 0;
-        this.last_order_date = "none";
-        Supplier.material = material;
+        this.last_order_date = "None";
     }
 
     // returns supplier name
@@ -64,20 +61,17 @@ public class Supplier {
         return last_order_date;
     }
 
-    // returns supplier material
-    public Material[] getMaterial() {
-        return material;
-    }
-
     // sets a new supplier name
     public void setName(String newName) {
         this.name = newName;
     }
 
     // generates a new supplier ID
-    public int setID(int supplierId) {
-        this.supplier_id = supplierId++;
-        return supplier_id;
+    public int setID() {
+        // find the length of supplier list, or set to 0 if it doesn't exist
+        int current = supplierList != null ? supplierList.size() : 0;
+        this.supplier_id = ++current;
+        return this.supplier_id;
     }
 
     // sets a new supplier email
@@ -106,7 +100,51 @@ public class Supplier {
     }
 
     // adds supplier to supplier list
-    public void AddSupplierToList(ArrayList<Supplier> Suppliers) {
-        this.Suppliers = Suppliers;
+    public void AddSupplierToList(ArrayList<Supplier> supplierList) {
+        this.supplierList = supplierList;
+    }
+}
+
+class createDefSuppliers {
+    public static void main(String[] args) {
+        ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+
+        addDefaultSuppliers(supplierList);
+
+        System.out.println("Default suppliers added.");
+    }
+
+    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList){
+        Supplier supplier1 = new Supplier(
+                "Rowan's Industrial Vehicles",
+                "enquiries@rivehicle.co.uk",
+                "07837 379433",
+                "4 Silverstone Road, Drivingville, Oxfordshire, OX19 3QX"
+        );
+        supplierList.add(supplier1);
+
+        Supplier supplier2 = new Supplier(
+                "Elliott Carpentry Solutions",
+                "purchase@elliotcarpentry.co.uk",
+                "07111 423711",
+                "9 Anfield Road, Everton, Liverpool, L4 3ES"
+        );
+        supplierList.add(supplier2);
+
+        Supplier supplier3 = new Supplier(
+                "Youngson Concrete Corp",
+                "buynow@youngsoncc.com",
+                "07955 187644",
+                "6 Park Lane, Chalbury, Oxfordshire, OX7 4BB"
+        );
+        supplierList.add(supplier3);
+
+        Supplier supplier4 = new Supplier(
+                "Davies and Butler Building Solutions",
+                "products@dandbbsolutions.co.uk",
+                "07741 744735",
+                "14 Factory Street, Cathays, Cardiff, CF24 7JJ"
+        );
+        supplierList.add(supplier4);
     }
 }
