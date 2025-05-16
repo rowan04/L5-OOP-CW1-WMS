@@ -106,14 +106,6 @@ public class Supplier {
 }
 
 class createDefSuppliers {
-    public static void main(String[] args) {
-        ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
-
-        addDefaultSuppliers(supplierList);
-
-        System.out.println("Default suppliers added.");
-    }
-
     public static void addDefaultSuppliers(ArrayList<Supplier> supplierList){
         Supplier supplier1 = new Supplier(
                 "Rowan's Industrial Vehicles",

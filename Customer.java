@@ -110,14 +110,6 @@ public class Customer {
 }
 
 class createDefCustomers {
-    public static void main(String[] args) {
-        ArrayList<Customer> customerList = new ArrayList<Customer>();
-
-        addDefaultCustomers(customerList);
-
-        System.out.println("Default customers added");
-    }
-
     public static void addDefaultCustomers(ArrayList<Customer> customerList) {
         Customer customer1 = new Customer(
                 "Josh Davies",
@@ -139,7 +131,7 @@ class createDefCustomers {
                 "Jamie Knight",
                 "jkknight@gmail.com",
                 "07181 764289",
-                "5 Falcon Villas, Hundley "
+                "5 Falcon Villas, Hundley Road, Charlbury, Oxfordshire, OX7 7GH"
         );
         customerList.add(customer3);
 
