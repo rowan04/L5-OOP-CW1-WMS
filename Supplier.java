@@ -106,7 +106,7 @@ public class Supplier {
 }
 
 class createDefSuppliers {
-    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList){
+    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList) {
         Supplier supplier1 = new Supplier(
                 "Rowan's Industrial Vehicles",
                 "enquiries@rivehicle.co.uk",

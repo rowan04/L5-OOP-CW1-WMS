@@ -13,6 +13,10 @@ public class Main {
         createDefCustomers.addDefaultCustomers(customerList);
         System.out.println("Default customers added");
 
+        ArrayList<Item> stockList = new ArrayList<Item>();
+        createDefItems.addDefaultItems(stockList);
+        System.out.println("Default stock added");
+
         // Run CLI
 
         // Start scanner
@@ -31,6 +35,7 @@ public class Main {
         char entry = scan.next().charAt(0);
         switch(entry) {
             case '1':
+                InventoryManager.displayStockCount(stockList);
 
             case '2':
 
