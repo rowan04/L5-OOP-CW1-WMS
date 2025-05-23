@@ -35,7 +35,10 @@ public class Main {
         char entry = scan.next().charAt(0);
         switch(entry) {
             case '1':
-                InventoryManager.displayStockCount(stockList);
+                for (Item item : stockList) {
+                    InventoryManager.displayStockCount(item);
+                    item.checkStockLevel();
+                }
 
             case '2':
 

@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 public class Item {
     protected String name;
     protected int item_id;
     protected int stock;
     protected double price;
+    protected int warning_level;
     protected int supplier_id;
 
     // returns item name
@@ -21,12 +24,17 @@ public class Item {
     }
 
     // returns item price
-    public double price() {
+    public double getPrice() {
         return price;
     }
 
-    // returns item
-    public int getSupplier_id() {
+    // returns item warning_level
+    public int getWarningLevel() {
+        return warning_level;
+    }
+
+    // returns item supplier id
+    public int getSupplierId() {
         return supplier_id;
     }
 
@@ -45,6 +53,10 @@ public class Item {
         this.price = newPrice;
     }
 
+    public void setWarningLevel(int newWarningLevel) {
+        this.warning_level = newWarningLevel;
+    }
+
     // sets a new item supplier, using its ID
     public void setSupplierID(int newSupplierID) {
         this.supplier_id = newSupplierID;
@@ -54,14 +66,22 @@ public class Item {
     public void updateStockCount(int stockChange) {
         this.stock = this.stock + stockChange;
     }
+
+    public void checkStockLevel() {
+        if (this.stock <= this.warning_level) {
+            System.out.println("Item: " + this.name + " needs restocking. Stock count (" +
+                this.stock + ") is lower than warning level count (" + this.warning_level + ").");
+        }
+    }
 }
 
 class Forklift extends Item {
     public Forklift() {
         this.name = "Forklift";
         this.item_id = 1;
-        this.stock = 3;
+        this.stock = 5;
         this.price = 6000;
+        this.warning_level = 3;
         this.supplier_id = 1;
     }
 }
@@ -70,8 +90,9 @@ class Excavator extends Item {
     public Excavator() {
         this.name = "Excavator";
         this.item_id = 2;
-        this.stock = 1;
+        this.stock = 3;
         this.price = 300000;
+        this.warning_level = 1;
         this.supplier_id = 1;
     }
 }
@@ -82,6 +103,7 @@ class Concrete_Mixer extends Item {
         this.item_id = 3;
         this.stock = 12;
         this.price = 450;
+        this.warning_level = 5;
         this.supplier_id = 3;
     }
 }
@@ -92,6 +114,7 @@ class Shelf_Unit extends Item {
         this.item_id = 4;
         this.stock = 34;
         this.price = 300000;
+        this.warning_level = 5;
         this.supplier_id = 2;
     }
 }
@@ -102,6 +125,7 @@ class Power_Drill extends Item {
         this.item_id = 5;
         this.stock = 67;
         this.price = 84.99;
+        this.warning_level = 10;
         this.supplier_id = 4;
     }
 }
@@ -112,7 +136,25 @@ class Safety_Helmet extends Item {
         this.item_id = 6;
         this.stock = 8;
         this.price = 14.99;
+        this.warning_level = 5;
         this.supplier_id = 4;
+    }
+}
+
+class createDefItems {
+    public static void addDefaultItems(ArrayList<Item> stockList) {
+        Item forklift = new Forklift();
+        stockList.add(forklift);
+        Item excavator = new Excavator();
+        stockList.add(excavator);
+        Item concreteMixer = new Concrete_Mixer();
+        stockList.add(concreteMixer);
+        Item shelfUnit = new Shelf_Unit();
+        stockList.add(shelfUnit);
+        Item powerDrill = new Power_Drill();
+        stockList.add(powerDrill);
+        Item safetyHelmet = new Safety_Helmet();
+        stockList.add(safetyHelmet);
     }
 }
 
