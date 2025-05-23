@@ -17,6 +17,7 @@ logs
 # development
 .vscode
 .idea
+out/
 
 # local files
 *.local
