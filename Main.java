@@ -1,26 +1,39 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         // Do default setup
+
+        // create arraylist to add supplier objects to
         ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
-        createDefSuppliers.addDefaultSuppliers(supplierList);
+        // create map to store supplier objects by ID
+        Map<Integer, Supplier> supplierMap = new HashMap<>();
+        createDefSuppliers.addDefaultSuppliers(supplierList, supplierMap);
         System.out.println("Default suppliers added.");
 
+        // create arraylist to add customer objects to
         ArrayList<Customer> customerList = new ArrayList<Customer>();
-        createDefCustomers.addDefaultCustomers(customerList);
-        System.out.println("Default customers added");
+        // create map to store customer objects by ID
+        Map<Integer, Customer> customerMap = new HashMap<>();
+        createDefCustomers.addDefaultCustomers(customerList, customerMap);
+        System.out.println("Default customers added.");
 
+        // create arraylist to add item objects to
         ArrayList<Item> stockList = new ArrayList<Item>();
-        createDefItems.addDefaultItems(stockList);
-        System.out.println("Default stock added");
+        // create map to store item objects by ID
+        Map<Integer, Item> itemMap = new HashMap<>();
+        createDefItems.addDefaultItems(stockList, itemMap);
+        System.out.println("Default stock added.");
+
 
         // Run CLI
 
         // Start scanner
-        Scanner scan = new Scanner(System.in);
+        Scanner scanDefault = new Scanner(System.in);
 
         // make a boolean variable that keeps the program running
         boolean run = true;
@@ -37,7 +50,7 @@ public class Main {
             System.out.println("Enter 8 to exit.");
 
             // uses switch statement to provide different options for user's input
-            char entry = scan.next().charAt(0);
+            char entry = scanDefault.next().charAt(0);
 
             switch (entry) {
                 case '1':
@@ -54,6 +67,32 @@ public class Main {
                     break;
 
                 case '2':
+                    for (Item item : stockList) {
+                        // display stock count so user can see what is low
+                        InventoryManager.displayStockCount(item);
+                        item.checkStockLevel();
+                    }
+
+                    // start new scanner to detect new input
+//                    Scanner scanAddStock = new Scanner(System.in);
+                    System.out.println("Enter the id of the item to order stock for:");
+                    int itemID = scanDefault.nextInt();
+
+                    // find item object from map from its id
+                    Item itemToStock = itemMap.get(itemID);
+                    // find supplier object from map from item's supplier id
+                    Supplier supplier = supplierMap.get(itemToStock.supplier_id);
+
+                    System.out.println("Enter the amount of stock you wish to purchase from " +
+                        supplier.getName() + ":");
+                    int stockAmount = scanDefault.nextInt();
+
+                    // update stock count
+                    itemToStock.updateStockCount(stockAmount);
+                    System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
+
+//                    scanAddStock.close();
+                    break;
 
                 case '3':
 
@@ -84,6 +123,6 @@ public class Main {
         }
 
         // close scanner
-        scan.close();
+        scanDefault.close();
     }
 }
