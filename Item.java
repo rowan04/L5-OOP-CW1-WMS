@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Item {
     protected String name;
@@ -142,19 +143,30 @@ class Safety_Helmet extends Item {
 }
 
 class createDefItems {
-    public static void addDefaultItems(ArrayList<Item> stockList) {
+    public static void addDefaultItems(ArrayList<Item> stockList, Map<Integer, Item> itemMap) {
         Item forklift = new Forklift();
         stockList.add(forklift);
+        itemMap.put(forklift.item_id, forklift);
+
         Item excavator = new Excavator();
         stockList.add(excavator);
+        itemMap.put(excavator.item_id, excavator);
+
         Item concreteMixer = new Concrete_Mixer();
         stockList.add(concreteMixer);
+        itemMap.put(concreteMixer.item_id, concreteMixer);
+
         Item shelfUnit = new Shelf_Unit();
         stockList.add(shelfUnit);
+        itemMap.put(shelfUnit.item_id, shelfUnit);
+
         Item powerDrill = new Power_Drill();
         stockList.add(powerDrill);
+        itemMap.put(powerDrill.item_id, powerDrill);
+
         Item safetyHelmet = new Safety_Helmet();
         stockList.add(safetyHelmet);
+        itemMap.put(safetyHelmet.item_id, safetyHelmet);
     }
 }
 
