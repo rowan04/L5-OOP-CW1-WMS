@@ -29,7 +29,6 @@ public class Main {
         createDefItems.addDefaultItems(stockList, itemMap);
         System.out.println("Default stock added.");
 
-
         // Run CLI
 
         // Start scanner
@@ -58,6 +57,7 @@ public class Main {
                         InventoryManager.displayStockCount(item);
                         item.checkStockLevel();
                     }
+
                     // Delay to give user time to read output
                     try {
                         Thread.sleep(5000);
@@ -67,42 +67,34 @@ public class Main {
                     break;
 
                 case '2':
-                    for (Item item : stockList) {
-                        // display stock count so user can see what is low
-                        InventoryManager.displayStockCount(item);
-                        item.checkStockLevel();
-                    }
+                    InventoryManager.updateStockLevels(stockList, itemMap, supplierMap, scanDefault);
 
-                    // start new scanner to detect new input
-//                    Scanner scanAddStock = new Scanner(System.in);
-                    System.out.println("Enter the id of the item to order stock for:");
-                    int itemID = scanDefault.nextInt();
-
-                    // find item object from map from its id
-                    Item itemToStock = itemMap.get(itemID);
-                    // find supplier object from map from item's supplier id
-                    Supplier supplier = supplierMap.get(itemToStock.supplier_id);
-
-                    System.out.println("Enter the amount of stock you wish to purchase from " +
-                        supplier.getName() + ":");
-                    int stockAmount = scanDefault.nextInt();
-
-                    // update stock count
-                    itemToStock.updateStockCount(stockAmount);
-                    System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
-
-//                    scanAddStock.close();
                     break;
 
                 case '3':
+                    break;
 
                 case '4':
+                    for (Supplier supplier : supplierList) {
+                        SupplierManager.displaySupplierInfo(supplier);
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
 
                 case '5':
+                    break;
 
                 case '6':
+                    break;
 
                 case '7':
+                    break;
 
                 case '8':
                     System.out.println("Goodbye!");
