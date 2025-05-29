@@ -43,7 +43,7 @@ public class Main {
             System.out.println("Enter 2 to order new stock.");
             System.out.println("Enter 3 to enter a customer order.");
             System.out.println("Enter 4 to view supplier information.");
-            System.out.println("Enter 5 to update supplier records.");
+            System.out.println("Enter 5 to update supplier information.");
             System.out.println("Enter 6 to view finances.");
             System.out.println("Enter 7 to create a financial report.");
             System.out.println("Enter 8 to exit.");
@@ -67,7 +67,13 @@ public class Main {
                     break;
 
                 case '2':
-                    InventoryManager.updateStockLevels(stockList, itemMap, supplierMap, scanDefault);
+                    // display stock count so user can see what is low
+                    for (Item item : stockList) {
+                        InventoryManager.displayStockCount(item);
+                        item.checkStockLevel();
+                    }
+
+                    InventoryManager.updateStockLevels(itemMap, supplierMap, scanDefault);
 
                     break;
 
@@ -88,6 +94,13 @@ public class Main {
                     break;
 
                 case '5':
+                    // display supplier information so user can see the current suppliers
+                    for (Supplier supplier : supplierList) {
+                        SupplierManager.displaySupplierInfo(supplier);
+                    }
+
+                    SupplierManager.updateSupplierInfo(supplierMap, scanDefault);
+
                     break;
 
                 case '6':

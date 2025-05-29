@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,17 +11,10 @@ public class InventoryManager {
     }
 
     public static void updateStockLevels(
-            ArrayList<Item> stockList,
             Map<Integer, Item> itemMap,
             Map<Integer, Supplier> supplierMap,
             Scanner scanDefault
     ) {
-        for (Item item : stockList) {
-            // display stock count so user can see what is low
-            InventoryManager.displayStockCount(item);
-            item.checkStockLevel();
-        }
-
         System.out.println("Enter the id of the item to order stock for:");
         int itemID = scanDefault.nextInt();
 
@@ -37,5 +30,10 @@ public class InventoryManager {
         // update stock count
         itemToStock.updateStockCount(stockAmount);
         System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
+
+        // update supplier order info
+        supplier.updateOrderCount();
+        Date today = new Date();
+        supplier.setLastOrderDate(String.valueOf(today));
     }
 }
