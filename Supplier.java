@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Supplier {
     private String name;
@@ -8,17 +9,17 @@ public class Supplier {
     private String address;
     private int total_orders;
     private String last_order_date;
-    private ArrayList<Supplier> supplierList;
 
     // constructor
     public Supplier(
             String name,
+            int supplier_id,
             String email,
             String phone_number,
             String address
     ) {
         this.name = name;
-        this.supplier_id = setID();
+        this.supplier_id = supplier_id;
         this.email = email;
         this.phone_number = phone_number;
         this.address = address;
@@ -66,14 +67,6 @@ public class Supplier {
         this.name = newName;
     }
 
-    // generates a new supplier ID
-    public int setID() {
-        // find the length of supplier list, or set to 0 if it doesn't exist
-        int current = supplierList != null ? supplierList.size() : 0;
-        this.supplier_id = ++current;
-        return this.supplier_id;
-    }
-
     // sets a new supplier email
     public void setEmail(String newEmail) {
         this.email = newEmail;
@@ -98,53 +91,48 @@ public class Supplier {
     public void updateOrderCount() {
         total_orders++;
     }
-
-    // adds supplier to supplier list
-    public void AddSupplierToList(ArrayList<Supplier> supplierList) {
-        this.supplierList = supplierList;
-    }
 }
 
 class createDefSuppliers {
-    public static void main(String[] args) {
-        ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
-
-        addDefaultSuppliers(supplierList);
-
-        System.out.println("Default suppliers added.");
-    }
-
-    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList){
+    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList, Map<Integer, Supplier> supplierMap) {
         Supplier supplier1 = new Supplier(
                 "Rowan's Industrial Vehicles",
+                supplierList.size() + 1,
                 "enquiries@rivehicle.co.uk",
                 "07837 379433",
                 "4 Silverstone Road, Drivingville, Oxfordshire, OX19 3QX"
         );
         supplierList.add(supplier1);
+        supplierMap.put(supplier1.getID(), supplier1);
 
         Supplier supplier2 = new Supplier(
                 "Elliott Carpentry Solutions",
+                supplierList.size() + 1,
                 "purchase@elliotcarpentry.co.uk",
                 "07111 423711",
                 "9 Anfield Road, Everton, Liverpool, L4 3ES"
         );
         supplierList.add(supplier2);
+        supplierMap.put(supplier2.getID(), supplier2);
 
         Supplier supplier3 = new Supplier(
                 "Youngson Concrete Corp",
+                supplierList.size() + 1,
                 "buynow@youngsoncc.com",
                 "07955 187644",
-                "6 Park Lane, Chalbury, Oxfordshire, OX7 4BB"
+                "6 Park Lane, Charlbury, Oxfordshire, OX7 4BB"
         );
         supplierList.add(supplier3);
+        supplierMap.put(supplier3.getID(), supplier3);
 
         Supplier supplier4 = new Supplier(
-                "Davies and Butler Building Solutions",
-                "products@dandbbsolutions.co.uk",
+                "Davies & Butler Building Solutions",
+                supplierList.size() + 1,
+                "products@d&bsolutions.co.uk",
                 "07741 744735",
                 "14 Factory Street, Cathays, Cardiff, CF24 7JJ"
         );
         supplierList.add(supplier4);
+        supplierMap.put(supplier4.getID(), supplier4);
     }
 }
