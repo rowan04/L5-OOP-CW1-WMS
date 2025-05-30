@@ -42,17 +42,21 @@ public class Main {
             System.out.println("Enter 1 to view current stock levels.");
             System.out.println("Enter 2 to order new stock.");
             System.out.println("Enter 3 to enter a customer order.");
-            System.out.println("Enter 4 to view supplier information.");
+            System.out.println("Enter 4 to view supplier list.");
             System.out.println("Enter 5 to update supplier information.");
-            System.out.println("Enter 6 to view finances.");
-            System.out.println("Enter 7 to create a financial report.");
-            System.out.println("Enter 8 to exit.");
+            System.out.println("Enter 6 to add a new supplier.");
+            System.out.println("Enter 7 to view customer list.");
+            System.out.println("Enter 8 to update customer information.");
+            System.out.println("Enter 9 to add a new customer.");
+            System.out.println("Enter 10 to view finances.");
+            System.out.println("Enter 11 to create a financial report.");
+            System.out.println("Enter 0 to exit.");
 
             // uses switch statement to provide different options for user's input
-            char entry = scanDefault.next().charAt(0);
+            String entry = scanDefault.nextLine();
 
             switch (entry) {
-                case '1':
+                case "1":
                     for (Item item : stockList) {
                         InventoryManager.displayStockCount(item);
                         item.checkStockLevel();
@@ -64,9 +68,10 @@ public class Main {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
                     break;
 
-                case '2':
+                case "2":
                     // display stock count so user can see what is low
                     for (Item item : stockList) {
                         InventoryManager.displayStockCount(item);
@@ -75,12 +80,28 @@ public class Main {
 
                     InventoryManager.updateStockLevels(itemMap, supplierMap, scanDefault);
 
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
 
-                case '3':
+                case "3":
+                    InventoryManager.enterCustomerOrder(customerList, customerMap, itemMap, stockList, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
 
-                case '4':
+                case "4":
                     for (Supplier supplier : supplierList) {
                         SupplierManager.displaySupplierInfo(supplier);
                     }
@@ -91,9 +112,10 @@ public class Main {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
                     break;
 
-                case '5':
+                case "5":
                     // display supplier information so user can see the current suppliers
                     for (Supplier supplier : supplierList) {
                         SupplierManager.displaySupplierInfo(supplier);
@@ -101,28 +123,93 @@ public class Main {
 
                     SupplierManager.updateSupplierInfo(supplierMap, scanDefault);
 
-                    break;
-
-                case '6':
-                    break;
-
-                case '7':
-                    break;
-
-                case '8':
-                    System.out.println("Goodbye!");
-                    run = false;
-                    break;
-
-                default:
-                    // called when user does an invalid input
-                    System.out.println("Invalid entry.");
                     // Delay to give user time to read output
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
+                    break;
+
+                case "6":
+                    SupplierManager.createNewSupplier(supplierList, supplierMap, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "7":
+                    for (Customer customer : customerList) {
+                        CustomerManager.displayCustomerInfo(customer);
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "8":
+                    // display customer information so user can see the current customers
+                    for (Customer customer : customerList) {
+                        CustomerManager.displayCustomerInfo(customer);
+                    }
+
+                    CustomerManager.updateCustomerInfo(customerMap, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "9":
+                    CustomerManager.createNewCustomer(customerList, customerMap, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "10":
+                    break;
+
+                case "11":
+                    break;
+
+                case "0":
+                    System.out.println("Goodbye!");
+                    run = false;
+
+                    break;
+
+                default:
+                    // called when user does an invalid input
+                    System.out.println("Invalid entry.");
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
             };
         }
