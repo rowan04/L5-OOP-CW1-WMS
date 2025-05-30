@@ -48,11 +48,20 @@ public class InventoryManager {
         for (Customer customer : customerList) {
             CustomerManager.displayCustomerInfo(customer);
         }
-        System.out.println("Enter the id of the customer who has ordered an item:");
+        System.out.println("Enter the id of the customer who has ordered an item, " +
+            "or 0 if you would like to create a new customer:"
+        );
         int customerID = scanDefault.nextInt();
         scanDefault.nextLine(); // Consume the leftover newline
-        // find customer object from map using its id
-        Customer customer = customerMap.get(customerID);
+
+        Customer customer;
+        if (customerID==0) {
+            CustomerManager.createNewCustomer(customerList, customerMap, scanDefault);
+            customer = customerList.getLast();
+        } else {
+            // find customer object from map using its id
+            customer = customerMap.get(customerID);
+        }
 
         // create arrayList so customer can buy multiple items
         ArrayList<Item> itemsBoughtList = new ArrayList<Item>();

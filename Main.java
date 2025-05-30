@@ -134,6 +134,14 @@ public class Main {
 
                 case "6":
                     SupplierManager.createNewSupplier(supplierList, supplierMap, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
 
                 case "7":
@@ -169,6 +177,14 @@ public class Main {
 
                 case "9":
                     CustomerManager.createNewCustomer(customerList, customerMap, scanDefault);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
 
                 case "10":
