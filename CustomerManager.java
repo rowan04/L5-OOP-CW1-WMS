@@ -79,15 +79,15 @@ public class CustomerManager {
         Map<Integer, Customer> customerMap,
         Scanner scanDefault
     ) {
-        System.out.println("Enter name:");
+        System.out.println("Enter customer name:");
         String name = scanDefault.nextLine();
 
         int id = customerList.size() + 1;
 
-        System.out.println("Enter email:");
+        System.out.println("Enter customer email:");
         String email = scanDefault.nextLine();
 
-        System.out.println("Enter address:");
+        System.out.println("Enter customer address:");
         String address = scanDefault.nextLine();
 
         Customer newCustomer = new Customer(name, id, email, address);

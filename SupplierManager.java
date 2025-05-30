@@ -90,18 +90,18 @@ public class SupplierManager {
             Map<Integer, Supplier> supplierMap,
             Scanner scanDefault
     ) {
-        System.out.println("Enter name:");
+        System.out.println("Enter supplier name:");
         String name = scanDefault.nextLine();
 
         int id = supplierList.size() + 1;
 
-        System.out.println("Enter email:");
+        System.out.println("Enter supplier email:");
         String email = scanDefault.nextLine();
 
-        System.out.println("Enter phone number:");
+        System.out.println("Enter supplier phone number:");
         String phoneNumber = scanDefault.nextLine();
 
-        System.out.println("Enter address:");
+        System.out.println("Enter supplier address:");
         String address = scanDefault.nextLine();
 
         Supplier newSupplier = new Supplier(name, id, email, phoneNumber, address);

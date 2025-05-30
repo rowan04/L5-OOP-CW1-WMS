@@ -44,18 +44,19 @@ public class Main {
             System.out.println("Enter 3 to enter a customer order.");
             System.out.println("Enter 4 to view supplier list.");
             System.out.println("Enter 5 to update supplier information.");
-            System.out.println("Enter 6 to view customer list.");
-            System.out.println("Enter 7 to update customer information.");
-            System.out.println("Enter 8 to view finances.");
-            System.out.println("Enter 9 to create a financial report.");
+            System.out.println("Enter 6 to add a new supplier.");
+            System.out.println("Enter 7 to view customer list.");
+            System.out.println("Enter 8 to update customer information.");
+            System.out.println("Enter 9 to add a new customer.");
+            System.out.println("Enter 10 to view finances.");
+            System.out.println("Enter 11 to create a financial report.");
             System.out.println("Enter 0 to exit.");
 
             // uses switch statement to provide different options for user's input
-            char entry = scanDefault.next().charAt(0);
-            scanDefault.nextLine(); // Consume the leftover newline
+            String entry = scanDefault.nextLine();
 
             switch (entry) {
-                case '1':
+                case "1":
                     for (Item item : stockList) {
                         InventoryManager.displayStockCount(item);
                         item.checkStockLevel();
@@ -70,7 +71,7 @@ public class Main {
 
                     break;
 
-                case '2':
+                case "2":
                     // display stock count so user can see what is low
                     for (Item item : stockList) {
                         InventoryManager.displayStockCount(item);
@@ -88,7 +89,7 @@ public class Main {
 
                     break;
 
-                case '3':
+                case "3":
                     InventoryManager.enterCustomerOrder(customerList, customerMap, itemMap, stockList, scanDefault);
 
                     // Delay to give user time to read output
@@ -100,7 +101,7 @@ public class Main {
 
                     break;
 
-                case '4':
+                case "4":
                     for (Supplier supplier : supplierList) {
                         SupplierManager.displaySupplierInfo(supplier);
                     }
@@ -114,7 +115,7 @@ public class Main {
 
                     break;
 
-                case '5':
+                case "5":
                     // display supplier information so user can see the current suppliers
                     for (Supplier supplier : supplierList) {
                         SupplierManager.displaySupplierInfo(supplier);
@@ -131,7 +132,11 @@ public class Main {
 
                     break;
 
-                case '6':
+                case "6":
+                    SupplierManager.createNewSupplier(supplierList, supplierMap, scanDefault);
+                    break;
+
+                case "7":
                     for (Customer customer : customerList) {
                         CustomerManager.displayCustomerInfo(customer);
                     }
@@ -145,7 +150,7 @@ public class Main {
 
                     break;
 
-                case '7':
+                case "8":
                     // display customer information so user can see the current customers
                     for (Customer customer : customerList) {
                         CustomerManager.displayCustomerInfo(customer);
@@ -162,13 +167,17 @@ public class Main {
 
                     break;
 
-                case '8':
+                case "9":
+                    CustomerManager.createNewCustomer(customerList, customerMap, scanDefault);
                     break;
 
-                case '9':
+                case "10":
                     break;
 
-                case '0':
+                case "11":
+                    break;
+
+                case "0":
                     System.out.println("Goodbye!");
                     run = false;
 
