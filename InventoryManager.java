@@ -39,6 +39,8 @@ public class InventoryManager {
             // update stock amd finances
             itemToStock.updateStockCount(stockAmount);
             finances.updateBalance(-cost);
+            finances.updateNumOrders();
+            finances.updateOrderTotal(cost);
             System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
 
             // update supplier order info
@@ -117,6 +119,8 @@ public class InventoryManager {
                 item.updateStockCount(-amount);
                 double income = amount * item.getPrice();
                 finances.updateBalance(income);
+                finances.updateNumPurchases();
+                finances.updatePurchaseTotal(income);
                 System.out.println("Order placed for " + amount + " " + item.getName() + ".");
                 item.checkStockLevel();
 

@@ -199,6 +199,13 @@ public class Main {
 
                 case "10":
                     System.out.println("Balance: " + finances.getBalance());
+                    System.out.println("Balance change: " + finances.calculateBalanceChange());
+                    System.out.println("Total stock orders: " + finances.getNumOrders() +
+                        ", totalling:" + finances.getOrderTotal()
+                    );
+                    System.out.println("Total customer purchases: " + finances.getNumPurchases() +
+                        ", totalling:" + finances.getPurchaseTotal()
+                    );
 
                     // Delay to give user time to read output
                     try {

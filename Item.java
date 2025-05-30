@@ -114,7 +114,7 @@ class Shelf_Unit extends Item {
         this.name = "Shelf Unit";
         this.item_id = 4;
         this.stock = 34;
-        this.price = 300000;
+        this.price = 49.45;
         this.warning_level = 5;
         this.supplier_id = 2;
     }
