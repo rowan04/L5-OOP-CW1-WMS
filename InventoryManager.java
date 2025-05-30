@@ -12,12 +12,14 @@ public class InventoryManager {
     }
 
     public static void updateStockLevels(
+            Finances finances,
             Map<Integer, Item> itemMap,
             Map<Integer, Supplier> supplierMap,
             Scanner scanDefault
     ) {
         System.out.println("Enter the id of the item to order stock for:");
         int itemID = scanDefault.nextInt();
+        scanDefault.nextLine(); // Consume the leftover newline
 
         // find item object from map using its id
         Item itemToStock = itemMap.get(itemID);
@@ -27,20 +29,29 @@ public class InventoryManager {
         System.out.println("Enter the amount of stock you wish to purchase from " +
                 supplier.getName() + ":");
         int stockAmount = scanDefault.nextInt();
+        scanDefault.nextLine(); // Consume the leftover newline
 
-        // update stock count
-        itemToStock.updateStockCount(stockAmount);
-        System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
+        double cost = stockAmount * itemToStock.getPrice();
 
-        // update supplier order info
-        supplier.updateOrderCount();
-        Date today = new Date();
-        supplier.setLastOrderDate(String.valueOf(today));
+        if (cost > finances.getBalance()) {
+            System.out.println("Sorry, not enough balance. Increase balance, or reduce amount ordered.");
+        } else {
+            // update stock amd finances
+            itemToStock.updateStockCount(stockAmount);
+            finances.updateBalance(-cost);
+            System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
+
+            // update supplier order info
+            supplier.updateOrderCount();
+            Date today = new Date();
+            supplier.setLastOrderDate(String.valueOf(today));
+        }
     }
 
     public static void enterCustomerOrder(
             ArrayList<Customer> customerList,
             Map<Integer, Customer> customerMap,
+            Finances finances,
             Map<Integer, Item> itemMap,
             ArrayList<Item> stockList,
             Scanner scanDefault
@@ -102,15 +113,18 @@ public class InventoryManager {
             if (amount > item.getStockCount()) {
                 System.out.println("Sorry, not enough stock. Restock item, or reduce amount bought.");
             } else {
+                // update stock and finances
                 item.updateStockCount(-amount);
+                double income = amount * item.getPrice();
+                finances.updateBalance(income);
                 System.out.println("Order placed for " + amount + " " + item.getName() + ".");
                 item.checkStockLevel();
+
+                // update customer order info
+                customer.updateOrderCount();
+                Date today = new Date();
+                customer.setLastOrderDate(String.valueOf(today));
             }
         }
-
-        // update customer order info
-        customer.updateOrderCount();
-        Date today = new Date();
-        customer.setLastOrderDate(String.valueOf(today));
     }
 }

@@ -9,25 +9,28 @@ public class Main {
         // Do default setup
 
         // create arraylist to add supplier objects to
-        ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+        ArrayList<Supplier> supplierList = new ArrayList<>();
         // create map to store supplier objects by ID
         Map<Integer, Supplier> supplierMap = new HashMap<>();
         createDefSuppliers.addDefaultSuppliers(supplierList, supplierMap);
         System.out.println("Default suppliers added.");
 
         // create arraylist to add customer objects to
-        ArrayList<Customer> customerList = new ArrayList<Customer>();
+        ArrayList<Customer> customerList = new ArrayList<>();
         // create map to store customer objects by ID
         Map<Integer, Customer> customerMap = new HashMap<>();
         createDefCustomers.addDefaultCustomers(customerList, customerMap);
         System.out.println("Default customers added.");
 
         // create arraylist to add item objects to
-        ArrayList<Item> stockList = new ArrayList<Item>();
+        ArrayList<Item> stockList = new ArrayList<>();
         // create map to store item objects by ID
         Map<Integer, Item> itemMap = new HashMap<>();
         createDefItems.addDefaultItems(stockList, itemMap);
         System.out.println("Default stock added.");
+
+        // Create the finances object, setting the initial balance
+        Finances finances = new Finances(10000.00);
 
         // Run CLI
 
@@ -78,7 +81,7 @@ public class Main {
                         item.checkStockLevel();
                     }
 
-                    InventoryManager.updateStockLevels(itemMap, supplierMap, scanDefault);
+                    InventoryManager.updateStockLevels(finances, itemMap, supplierMap, scanDefault);
 
                     // Delay to give user time to read output
                     try {
@@ -90,7 +93,14 @@ public class Main {
                     break;
 
                 case "3":
-                    InventoryManager.enterCustomerOrder(customerList, customerMap, itemMap, stockList, scanDefault);
+                    InventoryManager.enterCustomerOrder(
+                        customerList,
+                        customerMap,
+                        finances,
+                        itemMap,
+                        stockList,
+                        scanDefault
+                    );
 
                     // Delay to give user time to read output
                     try {
@@ -188,6 +198,14 @@ public class Main {
                     break;
 
                 case "10":
+                    System.out.println("Balance: " + finances.getBalance());
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
 
                 case "11":
@@ -211,7 +229,7 @@ public class Main {
                     }
 
                     break;
-            };
+            }
         }
 
         // close scanner
