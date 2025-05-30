@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,13 +12,13 @@ public class SupplierManager {
         int totalOrders = supplier.getOrderCount();
         String lastOrderDate = supplier.getLastOrderDate();
         System.out.println(
-                "Supplier name: " + name +
-                ", id: " + id +
-                ", email: " + email +
-                ", phone number: " + phoneNumber +
-                ", address: " + address +
-                ", total order count: " + totalOrders +
-                ", last order date: " + lastOrderDate + "."
+            "Supplier name: " + name +
+            ", id: " + id +
+            ", email: " + email +
+            ", phone number: " + phoneNumber +
+            ", address: " + address +
+            ", total order count: " + totalOrders +
+            ", last order date: " + lastOrderDate + "."
         );
     }
 
@@ -30,10 +31,10 @@ public class SupplierManager {
 
         String name = supplier.getName();
 
-        System.out.println("Enter 1 to update " + name + " name.");
-        System.out.println("Enter 2 to update " + name + " email.");
-        System.out.println("Enter 3 to update " + name + " phone number.");
-        System.out.println("Enter 4 to update " + name + " address.");
+        System.out.println("Enter 1 to update supplier " + name + "'s name.");
+        System.out.println("Enter 2 to update supplier " + name + "'s email.");
+        System.out.println("Enter 3 to update supplier " + name + "'s phone number.");
+        System.out.println("Enter 4 to update supplier " + name + "'s address.");
         System.out.println("Enter 5 to cancel.");
 
         // uses switch statement to provide different options for user's input
@@ -80,13 +81,31 @@ public class SupplierManager {
             default:
                 // called when user does an invalid input
                 System.out.println("Invalid entry.");
-                // Delay to give user time to read output
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
                 break;
         };
+    }
+
+    public static void createNewSupplier(
+            ArrayList<Supplier> supplierList,
+            Map<Integer, Supplier> supplierMap,
+            Scanner scanDefault
+    ) {
+        System.out.println("Enter name:");
+        String name = scanDefault.nextLine();
+
+        int id = supplierList.size() + 1;
+
+        System.out.println("Enter email:");
+        String email = scanDefault.nextLine();
+
+        System.out.println("Enter phone number:");
+        String phoneNumber = scanDefault.nextLine();
+
+        System.out.println("Enter address:");
+        String address = scanDefault.nextLine();
+
+        Supplier newSupplier = new Supplier(name, id, email, phoneNumber, address);
+        supplierList.add(newSupplier);
+        supplierMap.put(id, newSupplier);
     }
 }
