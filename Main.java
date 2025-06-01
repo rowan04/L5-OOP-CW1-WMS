@@ -53,8 +53,10 @@ public class Main {
             System.out.println("Enter 7 to view customer list.");
             System.out.println("Enter 8 to update or delete a customer.");
             System.out.println("Enter 9 to add a new customer.");
-            System.out.println("Enter 10 to view finances.");
-            System.out.println("Enter 11 to create a financial report.");
+            System.out.println("Enter 10 to view items.");
+            System.out.println("Enter 11 to update an item.");
+            System.out.println("Enter 12 to view finances.");
+            System.out.println("Enter 13 to create a financial report.");
             System.out.println("Enter 0 to exit.");
 
             // uses switch statement to provide different options for user's input
@@ -201,6 +203,38 @@ public class Main {
                     break;
 
                 case "10":
+                    // display item information so user can see the current items
+                    for (Item item : stockList) {
+                        InventoryManager.displayItemInfo(item, supplierMap);
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "11":
+                    // display item information so user can see the current items
+                    for (Item item : stockList) {
+                        InventoryManager.displayItemInfo(item, supplierMap);
+                    }
+
+                    InventoryManager.updateItemInfo(itemMap, scanDefault, supplierList, supplierMap);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "12":
                     System.out.println("Balance: £" + finances.getBalance());
                     System.out.println("Balance change: £" + finances.calculateBalanceChange());
                     System.out.println("Total stock orders: " + finances.getNumOrders() +
@@ -218,7 +252,7 @@ public class Main {
                     }
                     break;
 
-                case "11":
+                case "13":
                     Report.generateReport(finances, incomings, outgoings);
 
                     // Delay to give user time to read output
