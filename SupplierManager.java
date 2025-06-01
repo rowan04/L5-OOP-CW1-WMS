@@ -22,12 +22,24 @@ public class SupplierManager {
         );
     }
 
-    public static void updateSupplierInfo(Map<Integer, Supplier> supplierMap, Scanner scanDefault) {
-        System.out.println("Enter the id of the supplier to update:");
+    public static void updateSupplierInfo(
+        ArrayList<Supplier> supplierList,
+        Map<Integer, Supplier> supplierMap,
+        Scanner scanDefault
+    ) {
+        System.out.println("Enter the id of the supplier to update or delete:");
         int supplierID = scanDefault.nextInt();
 
-        // find supplier object from map using id
-        Supplier supplier = supplierMap.get(supplierID);
+        // check if a supplier with the inputted id exists.
+        // if it does, find supplier object from map using its id.
+        // else, display error and return.
+        Supplier supplier;
+        if (supplierMap.containsKey(supplierID)) {
+            supplier = supplierMap.get(supplierID);
+        } else {
+            System.out.println("There is no supplier with id: " + supplierID + ". Operation cancelled.");
+            return;
+        }
 
         String name = supplier.getName();
 
@@ -35,7 +47,8 @@ public class SupplierManager {
         System.out.println("Enter 2 to update supplier " + name + "'s email.");
         System.out.println("Enter 3 to update supplier " + name + "'s phone number.");
         System.out.println("Enter 4 to update supplier " + name + "'s address.");
-        System.out.println("Enter 5 to cancel.");
+        System.out.println("Enter 5 to delete supplier.");
+        System.out.println("Enter 0 to cancel.");
 
         // uses switch statement to provide different options for user's input
         char entry = scanDefault.next().charAt(0);
@@ -75,6 +88,14 @@ public class SupplierManager {
                 break;
 
             case '5':
+                // remove all references to supplier object, so that it is deleted
+                supplierMap.remove(supplier.getID());
+                supplierList.remove(supplier);
+                System.out.println("Supplier deleted.");
+
+                break;
+
+            case '0':
                 System.out.println("Supplier update cancelled.");
                 break;
 
@@ -82,7 +103,7 @@ public class SupplierManager {
                 // called when user does an invalid input
                 System.out.println("Invalid entry.");
                 break;
-        };
+        }
     }
 
     public static void createNewSupplier(
@@ -93,7 +114,10 @@ public class SupplierManager {
         System.out.println("Enter supplier name:");
         String name = scanDefault.nextLine();
 
-        int id = supplierList.size() + 1;
+        // set id to one greater than the id of the last supplier in the list
+        Supplier lastSupplierInList = supplierList.getLast();
+        int lastSupplierId = lastSupplierInList.getID();
+        int id = lastSupplierId + 1;
 
         System.out.println("Enter supplier email:");
         String email = scanDefault.nextLine();

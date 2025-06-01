@@ -24,8 +24,16 @@ public class CustomerManager {
         System.out.println("Enter the id of the customer to update:");
         int customerID = scanDefault.nextInt();
 
-        // find customer object from map using id
-        Customer customer = customerMap.get(customerID);
+        // check if a customer with the inputted id exists.
+        // if it does, find customer object from map using its id.
+        // else, display error and return.
+        Customer customer;
+        if (customerMap.containsKey(customerID)) {
+            customer = customerMap.get(customerID);
+        } else {
+            System.out.println("There is no customer with id: " + customerID + ". Operation cancelled.");
+            return;
+        }
 
         String name = customer.getName();
 
@@ -71,7 +79,7 @@ public class CustomerManager {
                 // called when user does an invalid input
                 System.out.println("Invalid entry.");
                 break;
-        };
+        }
     }
 
     public static void createNewCustomer(
@@ -82,7 +90,10 @@ public class CustomerManager {
         System.out.println("Enter customer name:");
         String name = scanDefault.nextLine();
 
-        int id = customerList.size() + 1;
+        // set id to one greater than the id of the last customer in the list
+        Customer lastCustomerInList = customerList.getLast();
+        int lastCustomerId = lastCustomerInList.getID();
+        int id = lastCustomerId + 1;
 
         System.out.println("Enter customer email:");
         String email = scanDefault.nextLine();

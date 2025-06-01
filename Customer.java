@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Customer {
     private String name;
-    private int customer_id = 3;
+    private final int customer_id;
     private String email;
     private String address;
     private int total_orders;
@@ -11,10 +11,10 @@ public class Customer {
 
     // constructor
     public Customer(
-            String name,
-            int customer_id,
-            String email,
-            String address
+        String name,
+        int customer_id,
+        String email,
+        String address
     ) {
         this.name = name;
         this.customer_id = customer_id;
@@ -74,13 +74,8 @@ public class Customer {
     }
 
     // updates customer total order count
-    public int updateOrderCount() {
-        return total_orders++;
-    }
-
-    // updates customer last order date
-    public String updateLastOrderDate() {
-        return last_order_date;
+    public void updateOrderCount() {
+        total_orders++;
     }
 }
 

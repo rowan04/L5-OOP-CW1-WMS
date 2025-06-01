@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +29,11 @@ public class Main {
         createDefItems.addDefaultItems(stockList, itemMap);
         System.out.println("Default stock added.");
 
+        // create deliveryList to add orders to
+        ArrayList<Delivery> deliveryList = new ArrayList<>();
+        // create map to store delivery objects by ID
+        Map<Integer, Delivery> deliveryMap = new HashMap<>();
+
         // Create the finances object, setting the initial balance
         Finances finances = new Finances(10000.00);
         ArrayList<String> incomings = new ArrayList<>();
@@ -49,13 +53,17 @@ public class Main {
             System.out.println("Enter 2 to order new stock.");
             System.out.println("Enter 3 to enter a customer order.");
             System.out.println("Enter 4 to view supplier list.");
-            System.out.println("Enter 5 to update supplier information.");
+            System.out.println("Enter 5 to update or delete a supplier.");
             System.out.println("Enter 6 to add a new supplier.");
             System.out.println("Enter 7 to view customer list.");
-            System.out.println("Enter 8 to update customer information.");
+            System.out.println("Enter 8 to update or delete a customer.");
             System.out.println("Enter 9 to add a new customer.");
-            System.out.println("Enter 10 to view finances.");
-            System.out.println("Enter 11 to create a financial report.");
+            System.out.println("Enter 10 to view items.");
+            System.out.println("Enter 11 to update an item.");
+            System.out.println("Enter 12 to view delivery list.");
+            System.out.println("Enter 13 to accept a delivery.");
+            System.out.println("Enter 14 to view finances.");
+            System.out.println("Enter 15 to create a financial report.");
             System.out.println("Enter 0 to exit.");
 
             // uses switch statement to provide different options for user's input
@@ -84,7 +92,15 @@ public class Main {
                         item.checkStockLevel();
                     }
 
-                    InventoryManager.updateStockLevels(finances, itemMap, outgoings, supplierMap, scanDefault);
+                    InventoryManager.updateStockLevels(
+                        deliveryList,
+                        deliveryMap,
+                        finances,
+                        itemMap,
+                        outgoings,
+                        supplierMap,
+                        scanDefault
+                    );
 
                     // Delay to give user time to read output
                     try {
@@ -135,7 +151,7 @@ public class Main {
                         SupplierManager.displaySupplierInfo(supplier);
                     }
 
-                    SupplierManager.updateSupplierInfo(supplierMap, scanDefault);
+                    SupplierManager.updateSupplierInfo(supplierList, supplierMap, scanDefault);
 
                     // Delay to give user time to read output
                     try {
@@ -202,6 +218,84 @@ public class Main {
                     break;
 
                 case "10":
+                    // display item information so user can see the current items
+                    for (Item item : stockList) {
+                        InventoryManager.displayItemInfo(item, supplierMap);
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "11":
+                    // display item information so user can see the current items
+                    for (Item item : stockList) {
+                        InventoryManager.displayItemInfo(item, supplierMap);
+                    }
+
+                    InventoryManager.updateItemInfo(itemMap, scanDefault, supplierList, supplierMap);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "12":
+                    if (deliveryList.isEmpty()) {
+                        System.out.println("No deliveries currently!");
+                    } else {
+                        for (Delivery delivery : deliveryList) {
+                            DeliveryManager.displayDeliveryInfo(delivery, itemMap);
+                        }
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "13":
+                    if (deliveryList.isEmpty()) {
+                        System.out.println("No deliveries currently!");
+                    } else {
+                        for (Delivery delivery : deliveryList) {
+                            DeliveryManager.displayDeliveryInfo(delivery, itemMap);
+                        }
+
+                        DeliveryManager.acceptDelivery(
+                            deliveryList,
+                            deliveryMap,
+                            finances,
+                            itemMap,
+                            outgoings,
+                            scanDefault,
+                            supplierMap
+                        );
+                    }
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case "14":
                     System.out.println("Balance: £" + finances.getBalance());
                     System.out.println("Balance change: £" + finances.calculateBalanceChange());
                     System.out.println("Total stock orders: " + finances.getNumOrders() +
@@ -219,7 +313,7 @@ public class Main {
                     }
                     break;
 
-                case "11":
+                case "15":
                     Report.generateReport(finances, incomings, outgoings);
 
                     // Delay to give user time to read output
