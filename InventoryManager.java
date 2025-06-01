@@ -14,6 +14,7 @@ public class InventoryManager {
     public static void updateStockLevels(
             Finances finances,
             Map<Integer, Item> itemMap,
+            ArrayList<String> outgoings,
             Map<Integer, Supplier> supplierMap,
             Scanner scanDefault
     ) {
@@ -41,6 +42,7 @@ public class InventoryManager {
             finances.updateBalance(-cost);
             finances.updateNumOrders();
             finances.updateOrderTotal(cost);
+            outgoings.add("Stock bought: " + itemToStock.getName() + ", Amount: " + stockAmount + ", Cost: £" + cost);
             System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
 
             // update supplier order info
@@ -54,6 +56,7 @@ public class InventoryManager {
             ArrayList<Customer> customerList,
             Map<Integer, Customer> customerMap,
             Finances finances,
+            ArrayList<String> incomings,
             Map<Integer, Item> itemMap,
             ArrayList<Item> stockList,
             Scanner scanDefault
@@ -121,6 +124,7 @@ public class InventoryManager {
                 finances.updateBalance(income);
                 finances.updateNumPurchases();
                 finances.updatePurchaseTotal(income);
+                incomings.add("Item bought: " + item.getName() + ", Amount: " + amount + ", Generating: £" + income);
                 System.out.println("Order placed for " + amount + " " + item.getName() + ".");
                 item.checkStockLevel();
 

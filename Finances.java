@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Finances {
     public double balance;
     public double initial_balance;
@@ -56,5 +58,24 @@ public class Finances {
 
     public double calculateBalanceChange() {
         return balance - initial_balance;
+    }
+}
+
+class Report {
+    public static void generateReport(Finances finances, ArrayList<String> incomings, ArrayList<String> outgoings) {
+        System.out.println("Today's financial report:");
+        System.out.println("\nIncomings:");
+        for (String incoming: incomings) {
+            System.out.println(incoming);
+        }
+        System.out.println("Total money received: £" + finances.getPurchaseTotal());
+
+        System.out.println("\nOutgoings:");
+        for (String outgoing: outgoings) {
+            System.out.println(outgoing);
+        }
+        System.out.println("Total money spent: £" + finances.getOrderTotal());
+
+        System.out.println("\nBalance: £" + finances.getBalance());
     }
 }

@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,8 @@ public class Main {
 
         // Create the finances object, setting the initial balance
         Finances finances = new Finances(10000.00);
+        ArrayList<String> incomings = new ArrayList<>();
+        ArrayList<String> outgoings = new ArrayList<>();
 
         // Run CLI
 
@@ -81,7 +84,7 @@ public class Main {
                         item.checkStockLevel();
                     }
 
-                    InventoryManager.updateStockLevels(finances, itemMap, supplierMap, scanDefault);
+                    InventoryManager.updateStockLevels(finances, itemMap, outgoings, supplierMap, scanDefault);
 
                     // Delay to give user time to read output
                     try {
@@ -97,6 +100,7 @@ public class Main {
                         customerList,
                         customerMap,
                         finances,
+                        incomings,
                         itemMap,
                         stockList,
                         scanDefault
@@ -198,13 +202,13 @@ public class Main {
                     break;
 
                 case "10":
-                    System.out.println("Balance: " + finances.getBalance());
-                    System.out.println("Balance change: " + finances.calculateBalanceChange());
+                    System.out.println("Balance: £" + finances.getBalance());
+                    System.out.println("Balance change: £" + finances.calculateBalanceChange());
                     System.out.println("Total stock orders: " + finances.getNumOrders() +
-                        ", totalling:" + finances.getOrderTotal()
+                        ", totalling: £" + finances.getOrderTotal()
                     );
                     System.out.println("Total customer purchases: " + finances.getNumPurchases() +
-                        ", totalling:" + finances.getPurchaseTotal()
+                        ", totalling: £" + finances.getPurchaseTotal()
                     );
 
                     // Delay to give user time to read output
@@ -216,6 +220,15 @@ public class Main {
                     break;
 
                 case "11":
+                    Report.generateReport(finances, incomings, outgoings);
+
+                    // Delay to give user time to read output
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
 
                 case "0":
