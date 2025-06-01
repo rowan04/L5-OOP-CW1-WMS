@@ -49,6 +49,8 @@ public class InventoryManager {
     }
 
     public static void updateStockLevels(
+            ArrayList<Delivery> deliveryList,
+            Map<Integer, Delivery> deliveryMap,
             Finances finances,
             Map<Integer, Item> itemMap,
             ArrayList<String> outgoings,
@@ -95,18 +97,18 @@ public class InventoryManager {
         if (cost > finances.getBalance()) {
             System.out.println("Sorry, not enough balance. Increase balance, or reduce amount ordered.");
         } else {
-            // update stock amd finances
-            itemToStock.updateStockCount(stockAmount);
-            finances.updateBalance(-cost);
-            finances.updateNumOrders();
-            finances.updateOrderTotal(cost);
-            outgoings.add("Stock bought: " + itemToStock.getName() + ", Amount: " + stockAmount + ", Cost: £" + cost);
-            System.out.println(itemToStock.name + " stock is now: " + itemToStock.stock);
-
-            // update supplier order info
-            supplier.updateOrderCount();
-            Date today = new Date();
-            supplier.setLastOrderDate(String.valueOf(today));
+            // add delivery to list
+            int deliveryID;
+            if (deliveryList.isEmpty()) {
+                deliveryID = 1;
+            } else {
+                Delivery lastDelivery = deliveryList.getLast();
+                deliveryID = lastDelivery.getDeliveryID() + 1;
+            }
+            Delivery delivery = new Delivery(deliveryID, stockAmount, cost, itemID);
+            deliveryList.add(delivery);
+            deliveryMap.put(deliveryID, delivery);
+            System.out.println("Order added to delivery list");
         }
     }
 

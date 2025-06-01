@@ -11,10 +11,10 @@ public class Customer {
 
     // constructor
     public Customer(
-            String name,
-            int customer_id,
-            String email,
-            String address
+        String name,
+        int customer_id,
+        String email,
+        String address
     ) {
         this.name = name;
         this.customer_id = customer_id;

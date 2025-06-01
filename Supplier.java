@@ -12,11 +12,11 @@ public class Supplier {
 
     // constructor
     public Supplier(
-            String name,
-            int supplier_id,
-            String email,
-            String phone_number,
-            String address
+        String name,
+        int supplier_id,
+        String email,
+        String phone_number,
+        String address
     ) {
         this.name = name;
         this.supplier_id = supplier_id;

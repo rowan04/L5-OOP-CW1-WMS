@@ -9,7 +9,7 @@ public class Finances {
     private double purchase_total;
 
     public Finances(
-            double balance
+        double balance
     ) {
         this.balance = balance;
         this.initial_balance = balance;
