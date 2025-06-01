@@ -1,4 +1,3 @@
-import java.awt.desktop.SystemEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -104,7 +103,7 @@ public class SupplierManager {
                 // called when user does an invalid input
                 System.out.println("Invalid entry.");
                 break;
-        };
+        }
     }
 
     public static void createNewSupplier(
@@ -115,7 +114,10 @@ public class SupplierManager {
         System.out.println("Enter supplier name:");
         String name = scanDefault.nextLine();
 
-        int id = supplierList.size() + 1;
+        // set id to one greater than the id of the last supplier in the list
+        Supplier lastSupplierInList = supplierList.getLast();
+        int lastSupplierId = lastSupplierInList.getID();
+        int id = lastSupplierId + 1;
 
         System.out.println("Enter supplier email:");
         String email = scanDefault.nextLine();

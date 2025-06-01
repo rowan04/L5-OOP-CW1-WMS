@@ -79,7 +79,7 @@ public class CustomerManager {
                 // called when user does an invalid input
                 System.out.println("Invalid entry.");
                 break;
-        };
+        }
     }
 
     public static void createNewCustomer(
@@ -90,7 +90,10 @@ public class CustomerManager {
         System.out.println("Enter customer name:");
         String name = scanDefault.nextLine();
 
-        int id = customerList.size() + 1;
+        // set id to one greater than the id of the last customer in the list
+        Customer lastCustomerInList = customerList.getLast();
+        int lastCustomerId = lastCustomerInList.getID();
+        int id = lastCustomerId + 1;
 
         System.out.println("Enter customer email:");
         String email = scanDefault.nextLine();

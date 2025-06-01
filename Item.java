@@ -44,11 +44,6 @@ public class Item {
         this.name = newName;
     }
 
-    // sets a new item id
-    public void setID(int newID) {
-        this.item_id = newID;
-    }
-
     // sets a new item price
     public void setPrice(double newPrice) {
         this.price = newPrice;
