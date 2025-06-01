@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,10 +48,10 @@ public class Main {
             System.out.println("Enter 2 to order new stock.");
             System.out.println("Enter 3 to enter a customer order.");
             System.out.println("Enter 4 to view supplier list.");
-            System.out.println("Enter 5 to update supplier information.");
+            System.out.println("Enter 5 to update or delete a supplier.");
             System.out.println("Enter 6 to add a new supplier.");
             System.out.println("Enter 7 to view customer list.");
-            System.out.println("Enter 8 to update customer information.");
+            System.out.println("Enter 8 to update or delete a customer.");
             System.out.println("Enter 9 to add a new customer.");
             System.out.println("Enter 10 to view finances.");
             System.out.println("Enter 11 to create a financial report.");
@@ -135,7 +134,7 @@ public class Main {
                         SupplierManager.displaySupplierInfo(supplier);
                     }
 
-                    SupplierManager.updateSupplierInfo(supplierMap, scanDefault);
+                    SupplierManager.updateSupplierInfo(supplierList, supplierMap, scanDefault);
 
                     // Delay to give user time to read output
                     try {

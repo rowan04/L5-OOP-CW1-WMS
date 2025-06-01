@@ -24,8 +24,16 @@ public class CustomerManager {
         System.out.println("Enter the id of the customer to update:");
         int customerID = scanDefault.nextInt();
 
-        // find customer object from map using id
-        Customer customer = customerMap.get(customerID);
+        // check if a customer with the inputted id exists.
+        // if it does, find customer object from map using its id.
+        // else, display error and return.
+        Customer customer;
+        if (customerMap.containsKey(customerID)) {
+            customer = customerMap.get(customerID);
+        } else {
+            System.out.println("There is no customer with id: " + customerID + ". Operation cancelled.");
+            return;
+        }
 
         String name = customer.getName();
 
