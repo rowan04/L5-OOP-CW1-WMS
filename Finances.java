@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
 public class Finances {
-    public double balance;
-    public double initial_balance;
-    public int num_orders;
-    public int num_purchases;
-    public double order_total;
-    public double purchase_total;
+    private double balance;
+    private final double initial_balance;
+    private int num_orders;
+    private int num_purchases;
+    private double order_total;
+    private double purchase_total;
 
     public Finances(
             double balance

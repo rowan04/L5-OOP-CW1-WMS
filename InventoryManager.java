@@ -22,8 +22,17 @@ public class InventoryManager {
         int itemID = scanDefault.nextInt();
         scanDefault.nextLine(); // Consume the leftover newline
 
-        // find item object from map using its id
-        Item itemToStock = itemMap.get(itemID);
+        // check if an item with the inputted id exists.
+        // if it does, find item object from map using its id.
+        // else, display error and return.
+        Item itemToStock;
+        if (itemMap.containsKey(itemID)) {
+            itemToStock = itemMap.get(itemID);
+        } else {
+            System.out.println("There is no item with id: " + itemID + ". Operation cancelled.");
+            return;
+        }
+
         // find supplier object from map from item's supplier id
         Supplier supplier = supplierMap.get(itemToStock.supplier_id);
 
@@ -70,17 +79,24 @@ public class InventoryManager {
         int customerID = scanDefault.nextInt();
         scanDefault.nextLine(); // Consume the leftover newline
 
+        // check if the user input 0 to create a new customer.
+        // if not, check if a customer with the inputted id exists.
+        // if it does, find item object from map using its id.
+        // else, display error and return.
         Customer customer;
         if (customerID==0) {
             CustomerManager.createNewCustomer(customerList, customerMap, scanDefault);
             customer = customerList.getLast();
-        } else {
+        } else if (customerMap.containsKey(customerID)) {
             // find customer object from map using its id
             customer = customerMap.get(customerID);
+        } else {
+            System.out.println("There is no customer with id: " + customerID + ". Operation cancelled.");
+            return;
         }
 
         // create arrayList so customer can buy multiple items
-        ArrayList<Item> itemsBoughtList = new ArrayList<Item>();
+        ArrayList<Item> itemsBoughtList = new ArrayList<>();
 
         for (Item item : stockList) {
             InventoryManager.displayStockCount(item);
@@ -88,9 +104,18 @@ public class InventoryManager {
         System.out.println("Enter the id of the item purchased:");
         int itemID = scanDefault.nextInt();
         scanDefault.nextLine(); // Consume the leftover newline
-        // find item object from map using its id
-        Item itemBought = itemMap.get(itemID);
-        itemsBoughtList.add(itemBought);
+
+        // check if an item with the inputted id exists.
+        // if it does, find item object from map using its id, and add it to list.
+        // else, display error and return.
+        Item itemBought;
+        if (itemMap.containsKey(itemID)) {
+            itemBought = itemMap.get(itemID);
+            itemsBoughtList.add(itemBought);
+        } else {
+            System.out.println("There is no item with id: " + itemID + ". Operation cancelled.");
+            return;
+        }
 
         boolean keepBuying = true;
 
@@ -102,9 +127,17 @@ public class InventoryManager {
                 System.out.println("Enter the id of the item purchased:");
                 itemID = scanDefault.nextInt();
                 scanDefault.nextLine(); // Consume the leftover newline
-                // find item object from map using its id
-                itemBought = itemMap.get(itemID);
-                itemsBoughtList.add(itemBought);
+
+                // check if an item with the inputted id exists.
+                // if it does, find item object from map using its id, and add it to list.
+                // else, display error and return.
+                if (itemMap.containsKey(itemID)) {
+                    itemBought = itemMap.get(itemID);
+                    itemsBoughtList.add(itemBought);
+                } else {
+                    System.out.println("There is no item with id: " + itemID + ". Operation cancelled.");
+                    return;
+                }
             } else {
                 keepBuying = false;
             }
