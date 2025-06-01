@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Supplier {
     private String name;
-    private int supplier_id;
+    private final int supplier_id;
     private String email;
     private String phone_number;
     private String address;
