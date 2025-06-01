@@ -12,21 +12,21 @@ public class Main {
         ArrayList<Supplier> supplierList = new ArrayList<>();
         // create map to store supplier objects by ID
         Map<Integer, Supplier> supplierMap = new HashMap<>();
-        createDefSuppliers.addDefaultSuppliers(supplierList, supplierMap);
+        SupplierManager.addDefaultSuppliers(supplierList, supplierMap);
         System.out.println("Default suppliers added.");
 
         // create arraylist to add customer objects to
         ArrayList<Customer> customerList = new ArrayList<>();
         // create map to store customer objects by ID
         Map<Integer, Customer> customerMap = new HashMap<>();
-        createDefCustomers.addDefaultCustomers(customerList, customerMap);
+        CustomerManager.addDefaultCustomers(customerList, customerMap);
         System.out.println("Default customers added.");
 
         // create arraylist to add item objects to
         ArrayList<Item> stockList = new ArrayList<>();
         // create map to store item objects by ID
         Map<Integer, Item> itemMap = new HashMap<>();
-        createDefItems.addDefaultItems(stockList, itemMap);
+        InventoryManager.addDefaultItems(stockList, itemMap);
         System.out.println("Default stock added.");
 
         // create deliveryList to add orders to
@@ -97,7 +97,6 @@ public class Main {
                         deliveryMap,
                         finances,
                         itemMap,
-                        outgoings,
                         supplierMap,
                         scanDefault
                     );

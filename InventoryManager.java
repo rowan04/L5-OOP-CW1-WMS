@@ -4,6 +4,32 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InventoryManager {
+    public static void addDefaultItems(ArrayList<Item> stockList, Map<Integer, Item> itemMap) {
+        Item forklift = new Forklift();
+        stockList.add(forklift);
+        itemMap.put(forklift.item_id, forklift);
+
+        Item excavator = new Excavator();
+        stockList.add(excavator);
+        itemMap.put(excavator.item_id, excavator);
+
+        Item concreteMixer = new Concrete_Mixer();
+        stockList.add(concreteMixer);
+        itemMap.put(concreteMixer.item_id, concreteMixer);
+
+        Item shelfUnit = new Shelf_Unit();
+        stockList.add(shelfUnit);
+        itemMap.put(shelfUnit.item_id, shelfUnit);
+
+        Item powerDrill = new Power_Drill();
+        stockList.add(powerDrill);
+        itemMap.put(powerDrill.item_id, powerDrill);
+
+        Item safetyHelmet = new Safety_Helmet();
+        stockList.add(safetyHelmet);
+        itemMap.put(safetyHelmet.item_id, safetyHelmet);
+    }
+
     public static void displayItemInfo(Item item, Map<Integer, Supplier> supplierMap) {
         String name = item.getName();
         int id = item.getID();
@@ -53,7 +79,6 @@ public class InventoryManager {
             Map<Integer, Delivery> deliveryMap,
             Finances finances,
             Map<Integer, Item> itemMap,
-            ArrayList<String> outgoings,
             Map<Integer, Supplier> supplierMap,
             Scanner scanDefault
     ) {
