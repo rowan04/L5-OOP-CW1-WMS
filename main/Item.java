@@ -38,6 +38,10 @@ public class Item {
         return supplier_id;
     }
 
+    public String outputSector() {
+        return "sector: Logistics";
+    }
+
     // sets a new item name
     public void setName(String newName) {
         this.name = newName;
@@ -90,6 +94,11 @@ class Excavator extends Item {
         this.warning_level = 1;
         this.supplier_id = 1;
     }
+
+    @Override
+    public String outputSector() {
+        return "sector: Construction";
+    }
 }
 
 class Concrete_Mixer extends Item {
@@ -100,6 +109,11 @@ class Concrete_Mixer extends Item {
         this.price = 450;
         this.warning_level = 5;
         this.supplier_id = 3;
+    }
+
+    @Override
+    public String outputSector() {
+        return "sector: Construction";
     }
 }
 
@@ -123,6 +137,11 @@ class Power_Drill extends Item {
         this.warning_level = 10;
         this.supplier_id = 4;
     }
+
+    @Override
+    public String outputSector() {
+        return "sector: Manufacturing";
+    }
 }
 
 class Safety_Helmet extends Item {
@@ -133,5 +152,10 @@ class Safety_Helmet extends Item {
         this.price = 14.99;
         this.warning_level = 5;
         this.supplier_id = 4;
+    }
+
+    @Override
+    public String outputSector() {
+        return "sector: Manufacturing";
     }
 }

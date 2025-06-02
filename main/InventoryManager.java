@@ -52,8 +52,9 @@ public class InventoryManager {
                 "Item name: " + name +
                 ", id: " + id +
                 ", stock count: " + stockCount +
-                ", price: " + price +
                 ", warning level: " + warningLevel +
+                ", price: " + price +
+                ", " + item.outputSector() +
                 ", supplier id: " + supplierID +
                 ", supplier name: " + supplierName + "."
             );
@@ -62,8 +63,9 @@ public class InventoryManager {
                 "Item name: " + name +
                 ", id: " + id +
                 ", stock count: " + stockCount +
-                ", price: " + price +
                 ", warning level: " + warningLevel +
+                ", price: " + price +
+                ", " + item.outputSector() +
                 ", supplier id: null."
             );
         }
