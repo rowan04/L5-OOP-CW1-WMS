@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Map;
+package main;
 
 public class Item {
     protected String name;

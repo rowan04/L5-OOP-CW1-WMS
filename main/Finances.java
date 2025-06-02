@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 
 public class Finances {
@@ -13,6 +15,10 @@ public class Finances {
     ) {
         this.balance = balance;
         this.initial_balance = balance;
+        this.num_orders = 0;
+        this.num_purchases = 0;
+        this.order_total = 0.00;
+        this.purchase_total = 0.00;
     }
 
     public double getBalance() {
