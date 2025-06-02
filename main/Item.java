@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Map;
+package main;
 
 public class Item {
     protected String name;
@@ -37,6 +36,10 @@ public class Item {
     // returns item supplier id
     public int getSupplierId() {
         return supplier_id;
+    }
+
+    public String outputSector() {
+        return "sector: Logistics";
     }
 
     // sets a new item name
@@ -91,6 +94,11 @@ class Excavator extends Item {
         this.warning_level = 1;
         this.supplier_id = 1;
     }
+
+    @Override
+    public String outputSector() {
+        return "sector: Construction";
+    }
 }
 
 class Concrete_Mixer extends Item {
@@ -101,6 +109,11 @@ class Concrete_Mixer extends Item {
         this.price = 450;
         this.warning_level = 5;
         this.supplier_id = 3;
+    }
+
+    @Override
+    public String outputSector() {
+        return "sector: Construction";
     }
 }
 
@@ -124,6 +137,11 @@ class Power_Drill extends Item {
         this.warning_level = 10;
         this.supplier_id = 4;
     }
+
+    @Override
+    public String outputSector() {
+        return "sector: Manufacturing";
+    }
 }
 
 class Safety_Helmet extends Item {
@@ -135,42 +153,9 @@ class Safety_Helmet extends Item {
         this.warning_level = 5;
         this.supplier_id = 4;
     }
-}
 
-class createDefItems {
-    public static void addDefaultItems(ArrayList<Item> stockList, Map<Integer, Item> itemMap) {
-        Item forklift = new Forklift();
-        stockList.add(forklift);
-        itemMap.put(forklift.item_id, forklift);
-
-        Item excavator = new Excavator();
-        stockList.add(excavator);
-        itemMap.put(excavator.item_id, excavator);
-
-        Item concreteMixer = new Concrete_Mixer();
-        stockList.add(concreteMixer);
-        itemMap.put(concreteMixer.item_id, concreteMixer);
-
-        Item shelfUnit = new Shelf_Unit();
-        stockList.add(shelfUnit);
-        itemMap.put(shelfUnit.item_id, shelfUnit);
-
-        Item powerDrill = new Power_Drill();
-        stockList.add(powerDrill);
-        itemMap.put(powerDrill.item_id, powerDrill);
-
-        Item safetyHelmet = new Safety_Helmet();
-        stockList.add(safetyHelmet);
-        itemMap.put(safetyHelmet.item_id, safetyHelmet);
+    @Override
+    public String outputSector() {
+        return "sector: Manufacturing";
     }
 }
-
-/*
- * Items:
- * Forklifts, (log)
- * Excavators, (cons)
- * Mixers, (cons)
- * Shelf_Unit, (log)
- * Power Drill (man)
- * Safety Helmet (man)
-  */

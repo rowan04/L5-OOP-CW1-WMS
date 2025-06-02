@@ -1,8 +1,52 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 public class SupplierManager {
+    public static void addDefaultSuppliers(ArrayList<Supplier> supplierList, Map<Integer, Supplier> supplierMap) {
+        Supplier supplier1 = new Supplier(
+            "Rowan's Industrial Vehicles",
+            supplierList.size() + 1,
+            "enquiries@rivehicle.co.uk",
+            "07837 379433",
+            "4 Silverstone Road, Drivingville, Oxfordshire, OX19 3QX"
+        );
+        supplierList.add(supplier1);
+        supplierMap.put(supplier1.getID(), supplier1);
+
+        Supplier supplier2 = new Supplier(
+            "Elliott Carpentry Solutions",
+            supplierList.size() + 1,
+            "purchase@elliotcarpentry.co.uk",
+            "07111 423711",
+            "9 Anfield Road, Everton, Liverpool, L4 3ES"
+        );
+        supplierList.add(supplier2);
+        supplierMap.put(supplier2.getID(), supplier2);
+
+        Supplier supplier3 = new Supplier(
+            "Youngson Concrete Corp",
+            supplierList.size() + 1,
+            "buynow@youngsoncc.com",
+            "07955 187644",
+            "6 Park Lane, Charlbury, Oxfordshire, OX7 4BB"
+        );
+        supplierList.add(supplier3);
+        supplierMap.put(supplier3.getID(), supplier3);
+
+        Supplier supplier4 = new Supplier(
+            "Davies & Butler Building Solutions",
+            supplierList.size() + 1,
+            "products@d&bsolutions.co.uk",
+            "07741 744735",
+            "14 Factory Street, Cathays, Cardiff, CF24 7JJ"
+        );
+        supplierList.add(supplier4);
+        supplierMap.put(supplier4.getID(), supplier4);
+    }
+
     public static void displaySupplierInfo(Supplier supplier) {
         String name = supplier.getName();
         int id = supplier.getID();
@@ -131,5 +175,7 @@ public class SupplierManager {
         Supplier newSupplier = new Supplier(name, id, email, phoneNumber, address);
         supplierList.add(newSupplier);
         supplierMap.put(id, newSupplier);
+
+        System.out.println("Supplier added!");
     }
 }
