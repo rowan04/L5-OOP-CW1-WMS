@@ -175,5 +175,7 @@ public class SupplierManager {
         Supplier newSupplier = new Supplier(name, id, email, phoneNumber, address);
         supplierList.add(newSupplier);
         supplierMap.put(id, newSupplier);
+
+        System.out.println("Supplier added!");
     }
 }

@@ -20,14 +20,12 @@ public class SupplierManagerTest {
     private final PrintStream originalOut = System.out;
     private ArrayList<Supplier> supplierList;
     private Map<Integer, Supplier> supplierMap;
-    private Supplier supplierA;
 
     @Before
     public void setup() {
         System.setOut(new PrintStream(outContent));
         supplierList = new ArrayList<>();
         supplierMap = new HashMap<>();
-        supplierA = new Supplier("Supplier A", 1, "email@hi.com", "07842332783", "5 Main Road, London");
     }
 
     @Test
@@ -41,6 +39,13 @@ public class SupplierManagerTest {
     @Test
     public void displaySupplierInfo_Success() {
         // Test supplier info is successfully output
+        Supplier supplierA = new Supplier(
+            "Supplier A",
+            1,
+            "email@hi.com",
+            "07842332783",
+            "5 Main Road, London"
+        );
         SupplierManager.displaySupplierInfo(supplierA);
         String output = "Supplier name: Supplier A" +
             ", id: 1" +

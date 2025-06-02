@@ -153,5 +153,7 @@ public class CustomerManager {
         Customer newCustomer = new Customer(name, id, email, address);
         customerList.add(newCustomer);
         customerMap.put(id, newCustomer);
+
+        System.out.println("Customer added!");
     }
 }
